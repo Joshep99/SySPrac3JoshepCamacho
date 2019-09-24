@@ -1,0 +1,418 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Practica 3 Se&ntilde;ales en tiempo continuo</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-24"><meta name="DC.source" content="P3.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Practica 3 Se&ntilde;ales en tiempo continuo</h1><!--introduction--><p>Integrantes:</p><div><ul><li>Irvin Joshep Camacho Dominguez</li><li>Solano Castrej&oacute;n Eric</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos</a></li><li><a href="#2">Introduccion</a></li><li><a href="#3">Desarrollo</a></li><li><a href="#4">Problema 1</a></li><li><a href="#5">Problema2</a></li><li><a href="#6">Problema 4</a></li><li><a href="#16">Problema 5</a></li><li><a href="#19">Problema 7</a></li><li><a href="#23">Bibliografias</a></li></ul></div><h2 id="1">Objetivos</h2><div><ul><li>Manipulaci&oacute;n b&aacute;sica de MATLAB</li><li>Gr&aacute;ficas de se&ntilde;ales reales y complejas continuas</li><li>Transformaci&oacute;n de se&ntilde;ales continuas (escalamientos y traslaciones)</li><li>Calculo de energ&iacute;a y potencia de se&ntilde;ales continuas</li></ul></div><h2 id="2">Introduccion</h2><p>Es un sistema de c&oacute;mputo num&eacute;rico que ofrece un entorno de desarrollo integrado (IDE) con un lenguaje de programaci&oacute;n propio (lenguaje M). Est&aacute; disponible para las plataformas Unix, Windows, Mac OS X y GNU/Linux.</p><p>Historia</p><p>En 1984 surge la primera versi&oacute;n, creado por Cleve Moler, con la idea de usar paquetes de subrutinas escritas en Fortran en los cursos de An&aacute;lisis Num&eacute;rico y Algebra Lineal, sin tener una necesidad de programas que usaran este lenguaje. El lenguaje de programaci&oacute;n M se cre&oacute; en 1970 proporcionando un acceso sencillo al Software de matrices LINPACK y EISPACK sin tener que hacer uso del lenguaje Fortran. Ya en 2004 se apreciaba que MATLAB era usado por aproximadamente m&aacute;s de un mill&oacute;n de personas, tanto acad&eacute;micos como empresarios.</p><p>Alternativas de Software Libre</p><div><ul><li>Octave</li></ul></div><p>La sintaxis de Octave es ampliamente compatible con Matlab. El int&eacute;rprete de Octave puede ejecutarse en modo GUI, como consola, o invocarse como parte de un script de shell. Se pueden encontrar m&aacute;s ejemplos de Octave en la wiki .</p><p>link de descarga: <a href="https://www.gnu.org/software/octave/">https://www.gnu.org/software/octave/</a></p><div><ul><li>Phyton</li></ul></div><p>La integraci&oacute;n bidireccional entre MATLAB y Python permite lo siguiente: * Llamada a MATLAB desde Python * Llamada a librer&iacute;as escritas en Python desde MATLAB * Empaquetado de programas de MATLAB para el despliegue escalable con Python</p><p>Link de descarga: <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p><h2 id="3">Desarrollo</h2><h2 id="4">Problema 1</h2><p>Crea una funci&oacute;n que se llame fun1 y reciba dos parametros <img src="P3_eq08589834809570054062.png" alt="$\omega$" style="width:10px;height:7px;"> y <img src="P3_eq05508344529756732484.png" alt="$a$" style="width:7px;height:7px;"> la funci&oacute;n debe regresar la evaluaci&oacute;n <img src="P3_eq01407365636722940873.png" alt="$F(\omega)=a/(a^2+\omega^2)$" style="width:124px;height:17px;">, esta funci&oacute;n debe trabajar con <img src="P3_eq16064389548595522758.png" alt="$a\in R$" style="width:37px;height:11px;"> y <img src="P3_eq02576817051637404792.png" alt="$t\in  R^n$" style="width:41px;height:11px;">. Debe mostrar su c&oacute;digo en el reporte (sin ejecutar).</p><p>function [f] = fun1(w,a)</p><pre>         f=a./(a.^2+w.^2);</pre><p>end</p><h2 id="5">Problema2</h2><p>Construya una funci&oacute;n que gr&aacute;fique funciones de <img src="P3_eq02145986785580767623.png" alt="$f:R\rightarrow R$" style="width:66px;height:14px;"> en el formato de su elecci&oacute;n y pruebe su c&oacute;digo mostrando la gr&aacute;fica de <img src="P3_eq04634431881849194213.png" alt="$F(\omega)$" style="width:31px;height:15px;"> vs <img src="P3_eq08589834809570054062.png" alt="$\omega$" style="width:10px;height:7px;"> en el intervalo <img src="P3_eq01169792831847459841.png" alt="$[-2,2]$" style="width:38px;height:15px;"> para <img src="P3_eq13016372792947090052.png" alt="$a=1$" style="width:34px;height:10px;">, no debe incluir el c&oacute;digo, solo el uso de la funci&oacute;n para mostrar la gr&aacute;fica.</p><pre class="codeinput"> a=1;
+
+ w=(-2:0.01:2);
+
+ fun2 = @(a,w)a./(a.^2+w.^2);
+
+ FuncionImprimir(w,fun2(a,w))
+</pre><img vspace="5" hspace="5" src="P3_01.png" alt=""> <h2 id="6">Problema 4</h2><p>Realiza las mismas operaciones que Lathi en las secciones M1.1 a M1.4 que se encuentra al final del cap&iacute;tulo 1 y antes de la secci&oacute;n de problemas, cambie los inline por funciones anonimas M1.1</p><pre class="codeinput">f = @(t) exp(-t).*cos(2*pi*t);
+t = (-2:2);
+plot(t,f(t));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f(t)'</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="P3_02.png" alt=""> <p>No ilustra el comportamiento oscilatorio esperado. Se requieren m&aacute;s puntos para representar adecuadamente f (t).</p><pre class="codeinput">t=(-2:0.01:2);
+plot(t,f(t));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f(t)'</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="P3_03.png" alt=""> <p>M1.2</p><pre class="codeinput">u = @(t) (t&gt;=0);
+t=(-2:2);
+plot(t,u(t));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'f(t)'</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="P3_04.png" alt=""> <p>El argumento del vector de cuatro elementos del eje especifica el eje x m&iacute;nimo, el eje x m&aacute;ximo, el eje y m&iacute;nimo y el eje y m&aacute;ximo, respectivamente.</p><pre class="codeinput">t = (-2:0.01:2);
+plot (t,u(t));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'u(t)'</span>);
+axis ([-2 2 -0.1 1.1]);
+</pre><img vspace="5" hspace="5" src="P3_05.png" alt=""> <pre class="codeinput">p = @(t) (t&gt;=0) &amp; (t&lt;1);
+t = (-1:0.01:2);
+plot (t,p(t));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'p(t)=u(t)-u(t-1)'</span>);
+axis ([-1 2 -0.1 1.1]);
+</pre><img vspace="5" hspace="5" src="P3_06.png" alt=""> <p>M1.3</p><pre class="codeinput">g = @(t) exp(-t).*cos(2*pi*t).*(t&gt;=0);
+t = (-2:0.01:2);
+plot(t,g(2*t+1));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'g(2t+1)'</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="P3_07.png" alt=""> <p>Luego, considere trazar g (?t + 1) sobre (?2 ? t ? 2). Como a <a href="0,">la forma de onda se reflejar&aacute;. Agregando la condici&oacute;n b</a> 0, la forma de onda final se desplaza hacia la derecha</p><pre class="codeinput">plot(t,g(-t+1));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g(-t+1)'</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="P3_08.png" alt=""> <p>Hasta este punto, las figuras se pueden dibujar razonablemente a mano. Considere trazar la funci&oacute;n m&aacute;s complicada h (t) = g (2t + 1) + g (?t + 1) sobre (?2 ? t ? 2) (Fig. M1.8). En este caso, un boceto a mano preciso es bastante dif&iacute;cil. Con MATLAB, el trabajo es mucho menos pesado.</p><pre class="codeinput">plot(t,g(2*t+1)+g(-t+1));
+xlabel(<span class="string">'t'</span>);
+ylabel(<span class="string">'h(t)'</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="P3_09.png" alt=""> <p>M1.4 Integraci&oacute;n num&eacute;rica y estimaci&oacute;n de energ&iacute;a de se&ntilde;al</p><pre class="codeinput">x = @(t) (exp(-t).*((t&gt;=0)&amp;(t&lt;1)));
+<span class="comment">% Dejando a $\Delta t = 0.01$</span>
+t = (0:0.01:1);
+E_x =sum(x(t).*x(t)*0.01);
+disp(E_x);
+</pre><pre class="codeoutput">    0.4367
+
+</pre><pre class="codeinput">x_squared = @(t) (exp(-2*t).*((t&gt;=0)&amp;(t&gt;1)));
+E_x = quad(x_squared,0,1);
+g_square  = @(t) (exp(-2*t).*(cos(2*pi*t).*2).*(t&gt;=0));
+t = (0:0.001:100);
+E_g = sum(g_square(t)*0.001);
+E_g = quad(g_square, 0,100);
+disp(E_g);
+</pre><pre class="codeoutput">    0.0920
+
+</pre><h2 id="16">Problema 5</h2><p>Resuelve el problema 1.2.2 usando las herramientas del paso anterior.</p><pre class="codeinput">f1 = @(t) (-t).*((t&gt;=-4)&amp;(t&lt;0))+ (t).*((t&gt;=0));
+t=(-4:1:2);
+plot(t,f1(t));
+grid <span class="string">on</span>
+ax = gca;
+ax.XAxisLocation = <span class="string">'origin'</span>;
+ax.YAxisLocation = <span class="string">'origin'</span>;
+ax.Box = <span class="string">'off'</span>;
+title(<span class="string">'x(t)'</span>);
+</pre><img vspace="5" hspace="5" src="P3_10.png" alt=""> <p>a) x(t-4)</p><pre class="codeinput">f1 = @(t) (-t+4).*((t&gt;=0)&amp;(t&lt;4))+ (t-4).*((t&gt;=4));
+t=(0:1:6);
+plot(t,f1(t));
+title(<span class="string">'x(t-4)'</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="P3_11.png" alt=""> <pre class="codeinput">f1 = @(t) (-t*3/2).*((t&gt;=-6)&amp;(t&lt;0))+ (t*3/2).*((t&gt;=3));
+t=(0:1:6);
+plot(t,f1(t));
+title(<span class="string">'x(t-4)'</span>);
+grid;
+</pre><img vspace="5" hspace="5" src="P3_12.png" alt=""> <h2 id="19">Problema 7</h2><p>Escriba una funci&oacute;n que se llame potencia que reciba como argumento una funci&oacute;n (anonima o simbolica) y que regrese el calculo de la potencia para esto puede resultar &uacute;til investigar las instrucciones int , integral Se presupone utilizar el c&oacute;digo solo con funciones de potencia. Muestre el c&oacute;digo sin ejecutar, y posteriormente resuelva el problema 1.1.4 syms t; f = funcion; T = periodoS; potencia = @(f) 1/T*int(f.^2,a,(-T/2),(T/2)); potencia(f); fprintf('%f',potencia(f)); a = (-2:.01:2);   x = @(a)  ((a.^3).*((a&gt;=-2)&amp;(t&lt;=2)));   x(a);   plot(t,x(a));   xlabel('t');   ylabel('f(t)');   grid on;</p><pre class="codeinput"><span class="comment">% fprintf('%f',potencia(f));</span>
+syms <span class="string">x</span>
+funo = x.^3;
+potencia = @(funo) (1/4)*int(funo.^2,x,(-4/2),(4/2));
+VP = potencia(funo);
+fprintf(<span class="string">'%f'</span>,VP);
+fprintf(<span class="string">'\n'</span>);
+vrms = sqrt(VP);
+fprintf(<span class="string">'%f'</span>,vrms);
+</pre><pre class="codeoutput">9.142857
+3.023716</pre><p>a) -x(t)</p><pre class="codeinput">syms <span class="string">x</span>
+funo = x.^3;
+funmodi = -(funo)
+potencia = @(funmodi) (1/4)*int(funmodi.^2,x,(-4/2),(4/2));
+VP = potencia(funmodi);
+fprintf(<span class="string">'%f'</span>,VP);
+fprintf(<span class="string">'\n'</span>);
+vrms = sqrt(VP);
+fprintf(<span class="string">'%f'</span>,vrms);
+</pre><pre class="codeoutput"> 
+funmodi =
+ 
+-x^3
+ 
+9.142857
+3.023716</pre><p>b) 2x(t)</p><pre class="codeinput">syms <span class="string">x</span>
+funo = x.^3;
+funmodi = 2.*(funo);
+potencia = @(funmodi) (1/4)*int(funmodi.^2,x,(-4/2),(4/2));
+VP = potencia(funmodi);
+fprintf(<span class="string">'%f'</span>,VP);
+fprintf(<span class="string">'\n'</span>);
+vrms = sqrt(VP);
+fprintf(<span class="string">'%f'</span>,vrms);
+</pre><pre class="codeoutput">36.571429
+6.047432</pre><p>c) cx(t)</p><pre class="codeinput">syms <span class="string">x</span>  <span class="string">c</span>
+funo = x.^3;
+funmodi = c.*(funo);
+potencia = @(funmodi) (1/4)*int(funmodi.^2,x,(-4/2),(4/2));
+VP = potencia(funmodi);
+fprintf(<span class="string">'%s'</span>,VP);
+fprintf(<span class="string">'\n'</span>);
+vrms = sqrt(VP);
+fprintf(<span class="string">'%s'</span>,vrms);
+</pre><pre class="codeoutput">(64*c^2)/7
+((64*c^2)/7)^(1/2)</pre><h2 id="23">Bibliografias</h2><div><ul><li><a href="https://la.mathworks.com/help/matlab/learn_matlab/scripts-and-functions.html">https://la.mathworks.com/help/matlab/learn_matlab/scripts-and-functions.html</a></li><li><a href="https://la.mathworks.com/help/matlab/ref/function.html">https://la.mathworks.com/help/matlab/ref/function.html</a></li><li><a href="file:///C:/Users/Xpired%20E/Downloads/B%20P%20Lathi%20-%20Linear%20systems%20and%20signals-Oxford%20University%20Press%20(2005).pdf">file:///C:/Users/Xpired%20E/Downloads/B%20P%20Lathi%20-%20Linear%20systems%20and%20signals-Oxford%20University%20Press%20(2005).pdf</a></li></ul></div><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Practica 3 Señales en tiempo continuo
+% Integrantes:
+%
+% * Irvin Joshep Camacho Dominguez
+% * Solano Castrejón Eric 
+%% Objetivos
+% * Manipulación básica de MATLAB
+% * Gráficas de señales reales y complejas continuas
+% * Transformación de señales continuas (escalamientos y traslaciones)
+% * Calculo de energía y potencia de señales continuas
+%% Introduccion
+% Es un sistema de cómputo numérico que ofrece un entorno de desarrollo integrado (IDE) con un lenguaje de programación propio (lenguaje M). 
+% Está disponible para las plataformas Unix, Windows, Mac OS X y GNU/Linux.
+%
+% Historia
+%
+% En 1984 surge la primera versión, creado por Cleve Moler, con la idea de usar paquetes de subrutinas escritas en Fortran en los cursos de Análisis Numérico y Algebra Lineal, sin tener una necesidad de programas que usaran este lenguaje. El lenguaje de programación M se creó en 1970 proporcionando un acceso sencillo al Software de matrices LINPACK y EISPACK sin tener que hacer uso del lenguaje Fortran.
+% Ya en 2004 se apreciaba que MATLAB era usado por aproximadamente más de un millón de personas, tanto académicos como empresarios.
+%
+% Alternativas de Software Libre
+% 
+% * Octave
+% 
+% La sintaxis de Octave es ampliamente compatible con Matlab. El intérprete de Octave puede ejecutarse en modo GUI, como consola, o invocarse como parte de un script de shell. Se pueden encontrar más ejemplos de Octave en la wiki .
+%
+% link de descarga: <https://www.gnu.org/software/octave/>
+%
+% * Phyton
+%
+% La integración bidireccional entre MATLAB y Python permite lo siguiente:
+% * Llamada a MATLAB desde Python
+% * Llamada a librerías escritas en Python desde MATLAB
+% * Empaquetado de programas de MATLAB para el despliegue escalable con Python
+%
+% Link de descarga: <https://www.python.org/downloads/>
+%% Desarrollo
+%% Problema 1
+% Crea una función que se llame fun1 y reciba dos parametros $\omega$ y $a$ la función debe regresar la evaluación $F(\omega)=a/(a^2+\omega^2)$, esta función debe trabajar con $a\in R$ y $t\in  R^n$. Debe mostrar su código en el reporte (sin ejecutar).
+%
+%
+% function [f] = fun1(w,a) 
+%
+%           f=a./(a.^2+w.^2);
+%
+% end
+%% Problema2
+% Construya una función que gráfique funciones de $f:R\rightarrow R$ en el formato de su elección 
+% y pruebe su código mostrando la gráfica de $F(\omega)$ vs $\omega$ en el intervalo $[-2,2]$ para 
+% $a=1$, no debe incluir el código, solo el uso de la función para mostrar la gráfica.
+
+ a=1;
+
+ w=(-2:0.01:2);
+
+ fun2 = @(a,w)a./(a.^2+w.^2); 
+
+ FuncionImprimir(w,fun2(a,w))
+%% Problema 4
+% Realiza las mismas operaciones que Lathi en las secciones M1.1 a M1.4 que se encuentra al final del capítulo 1 y antes de la sección de problemas, cambie los inline por funciones anonimas
+% M1.1
+f = @(t) exp(-t).*cos(2*pi*t);
+t = (-2:2);
+plot(t,f(t));
+xlabel('t');
+ylabel('f(t)');
+grid;
+%%
+% No ilustra el comportamiento oscilatorio esperado. Se requieren más puntos para representar adecuadamente f (t).
+t=(-2:0.01:2);
+plot(t,f(t));
+xlabel('t');
+ylabel('f(t)');
+grid;
+%%
+% M1.2
+u = @(t) (t>=0);
+t=(-2:2);
+plot(t,u(t));
+xlabel('t');
+ylabel('f(t)');
+grid;
+%%
+% El argumento del vector de cuatro elementos del eje especifica el eje x mínimo, el eje x máximo, el eje y mínimo y el eje y máximo, respectivamente.
+t = (-2:0.01:2);
+plot (t,u(t));
+xlabel('t'); 
+ylabel('u(t)');  
+axis ([-2 2 -0.1 1.1]);
+%%
+p = @(t) (t>=0) & (t<1);
+t = (-1:0.01:2);
+plot (t,p(t));
+xlabel('t'); 
+ylabel('p(t)=u(t)-u(t-1)');  
+axis ([-1 2 -0.1 1.1]);
+%%
+% M1.3
+g = @(t) exp(-t).*cos(2*pi*t).*(t>=0);
+t = (-2:0.01:2); 
+plot(t,g(2*t+1)); 
+xlabel('t'); 
+ylabel('g(2t+1)'); 
+grid;
+%%
+% Luego, considere trazar g (?t + 1) sobre (?2 ? t ? 2). Como a <0, la forma de onda se reflejará. Agregando la condición b> 0, la forma de onda final se desplaza hacia la derecha
+plot(t,g(-t+1)); 
+xlabel('t'); ylabel('g(-t+1)');
+grid;
+%%
+% Hasta este punto, las figuras se pueden dibujar razonablemente a mano. Considere trazar la función más complicada h (t) = g (2t + 1) + g (?t + 1) sobre (?2 ? t ? 2) (Fig. M1.8). En este caso, un boceto a mano preciso es bastante difícil. Con MATLAB, el trabajo es mucho menos pesado.
+plot(t,g(2*t+1)+g(-t+1)); 
+xlabel('t'); 
+ylabel('h(t)'); 
+grid;
+%%
+% M1.4 Integración numérica y estimación de energía de señal
+x = @(t) (exp(-t).*((t>=0)&(t<1)));
+% Dejando a $\Delta t = 0.01$
+t = (0:0.01:1);
+E_x =sum(x(t).*x(t)*0.01);
+disp(E_x);
+%%
+x_squared = @(t) (exp(-2*t).*((t>=0)&(t>1)));
+E_x = quad(x_squared,0,1); 
+g_square  = @(t) (exp(-2*t).*(cos(2*pi*t).*2).*(t>=0));
+t = (0:0.001:100);
+E_g = sum(g_square(t)*0.001);
+E_g = quad(g_square, 0,100);
+disp(E_g);
+%% Problema 5
+% Resuelve el problema 1.2.2 usando las herramientas del paso anterior.
+% 
+f1 = @(t) (-t).*((t>=-4)&(t<0))+ (t).*((t>=0));
+t=(-4:1:2);
+plot(t,f1(t));
+grid on
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+ax.Box = 'off';
+title('x(t)');
+%%
+% a) x(t-4)
+f1 = @(t) (-t+4).*((t>=0)&(t<4))+ (t-4).*((t>=4));
+t=(0:1:6);
+plot(t,f1(t));
+title('x(t-4)');
+grid;
+%%
+f1 = @(t) (-t*3/2).*((t>=-6)&(t<0))+ (t*3/2).*((t>=3));
+t=(0:1:6);
+plot(t,f1(t));
+title('x(t-4)');
+grid;
+%% Problema 7
+% Escriba una función que se llame potencia que reciba como argumento una función (anonima o simbolica)
+% y que regrese el calculo de la potencia para esto puede resultar útil investigar las instrucciones int , integral Se presupone utilizar el código solo con funciones de potencia. 
+% Muestre el código sin ejecutar, y posteriormente resuelva el problema 1.1.4
+% syms t;
+% f = funcion;
+% T = periodoS;
+% potencia = @(f) 1/T*int(f.^2,a,(-T/2),(T/2));
+% potencia(f);
+% fprintf('%f',potencia(f));
+% a = (-2:.01:2);
+%   x = @(a)  ((a.^3).*((a>=-2)&(t<=2)));
+%   x(a);
+%   plot(t,x(a));
+%   xlabel('t');
+%   ylabel('f(t)');
+%   grid on;
+
+% fprintf('%f',potencia(f));
+syms x
+funo = x.^3;
+potencia = @(funo) (1/4)*int(funo.^2,x,(-4/2),(4/2));
+VP = potencia(funo);
+fprintf('%f',VP);
+fprintf('\n');
+vrms = sqrt(VP);
+fprintf('%f',vrms);
+%%
+% a) -x(t)
+syms x
+funo = x.^3;
+funmodi = -(funo)
+potencia = @(funmodi) (1/4)*int(funmodi.^2,x,(-4/2),(4/2));
+VP = potencia(funmodi);
+fprintf('%f',VP);
+fprintf('\n');
+vrms = sqrt(VP);
+fprintf('%f',vrms);
+%%
+% b) 2x(t)
+syms x
+funo = x.^3;
+funmodi = 2.*(funo);
+potencia = @(funmodi) (1/4)*int(funmodi.^2,x,(-4/2),(4/2));
+VP = potencia(funmodi);
+fprintf('%f',VP);
+fprintf('\n');
+vrms = sqrt(VP);
+fprintf('%f',vrms);
+%% 
+% c) cx(t)
+syms x  c
+funo = x.^3;
+funmodi = c.*(funo);
+potencia = @(funmodi) (1/4)*int(funmodi.^2,x,(-4/2),(4/2));
+VP = potencia(funmodi);
+fprintf('%s',VP);
+fprintf('\n');
+vrms = sqrt(VP);
+fprintf('%s',vrms);
+%% Bibliografias
+% * <https://la.mathworks.com/help/matlab/learn_matlab/scripts-and-functions.html>
+% * <https://la.mathworks.com/help/matlab/ref/function.html>
+% * <file:///C:/Users/Xpired%20E/Downloads/B%20P%20Lathi%20-%20Linear%20systems%20and%20signals-Oxford%20University%20Press%20(2005).pdf>
+##### SOURCE END #####
+--></body></html>
